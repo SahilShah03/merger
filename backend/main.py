@@ -19,16 +19,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-def ensure_upload_dir():
-    if not os.path.exists('uploads'):
-        os.makedirs('uploads')
-
 @app.post("/generate-report")
 async def generate_report_endpoint(file: UploadFile = File(...)):
     if not file.filename.endswith('.nessus'):
         raise HTTPException(status_code=400, detail="Invalid file format. Please upload a .nessus file.")
-    ensure_upload_dir()
-    file_path = os.path.join('uploads', file.filename)
+    file_path = os.path.join('/tmp/', file.filename)
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     report_path = generate_report(file_path)
