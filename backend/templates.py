@@ -46,13 +46,13 @@ def generate_report(nessus_file_path):
         doc = Document()
         doc.add_heading('Vulnerability Assessment Report', 0)
         doc.add_paragraph('Error: Invalid or corrupt Nessus file.')
-        output_path = os.path.join(os.path.dirname(nessus_file_path), 'vulnerability_report.docx')
+        output_path = os.path.join('/tmp/', 'vulnerability_report.docx')
         doc.save(output_path)
         return output_path
 
     doc = Document()
     doc.add_heading('Vulnerability Assessment Report', 0)
     doc.add_paragraph('This is a simple vulnerability report.')
-    output_path = os.path.join(os.path.dirname(nessus_file_path), 'vulnerability_report.docx')
+    output_path = os.path.join('/tmp/', 'vulnerability_report.docx')
     doc.save(output_path)
     return output_path 
