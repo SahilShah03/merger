@@ -140,7 +140,7 @@ function App() {
           formData.append('logo', logoFile);
         }
 
-        const response = await axios.post('https://merger-ua6a.onrender.com/generate-report', formData, {
+        const response = await axios.post('https://merger-n93r.onrender.com/', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
