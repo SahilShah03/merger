@@ -1,14 +1,27 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from templates import generate_report
 import os
 import shutil
 
+origins = [
+    os.getenv("CORS_ORIGINS", "http://localhost:3000") # Default to localhost for development
+]
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 def ensure_upload_dir():
     if not os.path.exists('uploads'):
         os.makedirs('uploads')
-
-app = FastAPI()
 
 @app.post("/generate-report")
 async def generate_report_endpoint(file: UploadFile = File(...)):
