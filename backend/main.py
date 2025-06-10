@@ -34,4 +34,8 @@ async def generate_report_endpoint(file: UploadFile = File(...)):
     report_path = generate_report(file_path)
     if not os.path.exists(report_path):
         raise HTTPException(status_code=500, detail="Failed to generate report file")
-    return FileResponse(report_path, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", filename="vulnerability_report.docx") 
+    return FileResponse(report_path, media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document", filename="vulnerability_report.docx")
+
+@app.get("/")
+async def root():
+    return {"message": "Server is working"} 
